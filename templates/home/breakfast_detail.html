@@ -3,14 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
-    {% if breakfast_list %}
-        <ul>
+     {% if breakfast_list %}
+    <h2>신청 내역</h2>
+        <table>
+            <tr>
+                <th>소속</th>
+                <th>이름</th>
+                <th>신청 시간</th>
+                <th></th>
+            </tr>
+
             {% for breakfast in breakfast_list %}
-                <li><p>{{ breakfast.group }} {{ breakfast.name }} {{ breakfast.create_date }}</p></li>
+            <tr>
+                <th>{{ breakfast.group }}</th>
+                <th>{{ breakfast.name }}</th>
+                <th>{{ breakfast.create_date }}</th>
+                <th><a href="{% url 'home:breakfast_delete' breakfast.id %}">삭제</a></th>
+            </tr>
             {% endfor %}
-        </ul>
+
+        </table>
     {% else %}
         <p>질문이 없습니다.</p>
     {% endif %}
